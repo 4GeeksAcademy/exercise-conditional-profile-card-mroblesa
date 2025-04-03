@@ -31,19 +31,26 @@ function render(variables = {}) {
   if (variables.includeCover == false) cover = "<div class='cover'></div>";
   const newName = variables.name ? variables.name : "";
   const newLastName = variables.lastName ? variables.lastName : "";
-  const newSocialMediaPosition = variables.socialMediaPosition ? "" : "";
+  let socialMedia = `<ul class="position-right">`;
   if (variables.twitter)
-    // reset the website body with the new html output
-    document.querySelector("#widget_content").innerHTML = `<div class="widget">
+    socialMedia += `<li><a href="https://twitter.com/4geeksacademy">"<i class="fab fa-twitter"></i></a></li>`;
+  if (variables.github)
+    socialMedia += `<li><a href="https://github.com/4geeksacademy"><i class="fab fa-github"></i></a></li>`;
+  if (variables.linkedin)
+    socialMedia += `<li><a href="https://linkedin.com/school/4geeksacademy"><i class="fab fa-linkedin"></i></a></li>`;
+  if (variables.instagram)
+    socialMedia += `<li><a href="https://instagram.com/4geeksacademy"><i class="fab fa-instagram"></i></a></li>`;
+
+  const postionSide = variables.socialMediaPosition || "position-right";
+  // reset the website body with the new html output
+  document.querySelector("#widget_content").innerHTML = `<div class="widget">
             ${cover}
           <img src="${variables.avatarURL}" class="photo" />
           <h1>${newName} ${newLastName}</h1>
           <h2>${variables.role || ""}</h2>
           <h3>${variables.city || ""}, ${variables.country || ""}</h3>
-          <ul class="position-right">${newSocialMediaPosition} 
-            <li><a href="https://twitter.com/4geeksacademy">${
-              variables.twitter ? variables.twitter : ""
-            }"<i class="fab fa-twitter"></i></a></li>
+          <ul class="position-right"${postionSide}>
+            <li><a href="https://twitter.com/4geeksacademy">"<i class="fab fa-twitter"></i></a></li>
             <li><a href="https://github.com/4geeksacademy"><i class="fab fa-github"></i></a></li>
             <li><a href="https://linkedin.com/school/4geeksacademy"><i class="fab fa-linkedin"></i></a></li>
             <li><a href="https://instagram.com/4geeksacademy"><i class="fab fa-instagram"></i></a></li>
